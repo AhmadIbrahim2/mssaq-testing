@@ -17,8 +17,15 @@
 import './commands';
 import "cypress-real-events/support";
 
+// Listen to uncaught exceptions in Cypress tests
 Cypress.on('uncaught:exception', (err) => {
-  if (err.message.includes('Minified React error #418') || err.message.includes('Minified React error #329') || err.message.includes('Minified React error #423')) {
-    return false; 
+  // Ignore specific React minified errors that we expect and don't want to fail the test
+  if (
+    err.message.includes('Minified React error #418') || 
+    err.message.includes('Minified React error #329') || 
+    err.message.includes('Minified React error #423')
+  ) {
+    // Returning false prevents Cypress from failing the test on these errors
+    return false;
   }
 });

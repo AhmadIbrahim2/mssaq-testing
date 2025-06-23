@@ -44,10 +44,12 @@ import 'cypress-file-upload';
 //   }
 // }
 
+// Define a custom Cypress command to log in to the Dashboard
 Cypress.Commands.add("loginToDashboard",()=>{
 
     cy.visit("https://app.msaaqdev.com")
 
+    // Load login credentials from the 'dashboard' fixture file
     cy.fixture("dashboard").then((data)=>{
       cy.get('[name = email]').type(data.email)
       cy.get('[name = password]').type(data.password)
@@ -56,12 +58,14 @@ Cypress.Commands.add("loginToDashboard",()=>{
     cy.get('[type = submit]').contains('تسجيل الدخول').click()
 });
 
+// Define a custom Cypress command to log in to the Tenant application
 Cypress.Commands.add("loginToTenant",()=>{
 
     cy.visit("https://msaaq-qa.msaaqdev.com/")
 
     cy.get('a').contains('تسجيل/دخول').click();
     
+    // Load login credentials from the 'tenant' fixture file
     cy.fixture("tenant").then((data)=>{
       cy.get('[data-testid = auth_email-input]').type(data.email)
       cy.get('[data-testid = auth_login-button]').click()
