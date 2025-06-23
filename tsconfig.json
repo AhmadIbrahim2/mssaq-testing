@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["es6", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "types": ["cypress", "@badeball/cypress-cucumber-preprocessor"],
+    "baseUrl": "."
+  },
+  "include": ["**/*.ts","/cypress/support/cypress-real-events.d.ts"]
+}
