@@ -106,6 +106,18 @@ Example Feature (create-course.feature):
 ```
 ----------------------------------------------------------
 
+🚀 Running the Tests in Order
+To ensure stability, the test features should be executed in the following order:
+
+- create-course.feature
+
+- update-course-settings.feature
+
+- add-quiz.feature
+
+- tenant.feature
+
+----------------------------------------------------------
 💻 Useful Scripts
 
 * Run specific test:
