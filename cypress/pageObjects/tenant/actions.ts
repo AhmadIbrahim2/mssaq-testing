@@ -30,7 +30,7 @@ class TenantActions {
         return this;
     }
 
-    answerForQuestions (order : string[]) {
+    answerForQuestions (order : string[], label: string) {
     // Get the text of the first question
     cy.get('.text-node').invoke('text').then((text1) => {
 
@@ -47,7 +47,7 @@ class TenantActions {
       // Save the second question text into the order array
       order.push(text2.trim());
       // Log the question order to the Cypress console
-      cy.log('First order:', order);
+      cy.log(`${label}:`, order);
     });
 
     cy.get('button').contains('تقديم الإجابة').click({force:true});

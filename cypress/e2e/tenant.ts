@@ -62,7 +62,7 @@ When('the user starts the quiz', () => {
 });
 
 When('answers all the questions', () => {
-    tenantAct.answerForQuestions(firstOrder);
+    tenantAct.answerForQuestions(firstOrder, 'First order');
 });
 
 Then('the quiz should be submitted successfully', () => {
@@ -72,7 +72,7 @@ Then('the quiz should be submitted successfully', () => {
 When('the user clicks on "إعادة الاختبار"', () => {
     tenantAct.clicksOnRetakeTheQuiz();
     
-    tenantAct.answerForQuestions(secondOrder);
+    tenantAct.answerForQuestions(secondOrder, 'Second order');
 });
 
 Then('the quiz should be retaken successfully', () => {
