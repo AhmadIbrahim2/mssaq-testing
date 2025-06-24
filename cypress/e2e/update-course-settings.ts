@@ -17,6 +17,7 @@ When('clicks on "ادارة المحتوى"',()=>{
 
 When('clicks on "الدورات التدريبية"',()=>{
     updateSettingsAct.clicksOnTrainingCourse();
+    cy.wait(3000)
 });
 
 When('clicks on "تعديل" of the created course',()=>{
@@ -26,6 +27,8 @@ When('clicks on "تعديل" of the created course',()=>{
         const courseTitle = data.title;
         updateSettingsAct.clicksOnCreatedCourse(courseTitle);
     });
+
+    cy.wait(3000)
 });
 
 When('clicks on "إعدادات الدورة" button',()=>{

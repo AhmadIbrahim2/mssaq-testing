@@ -59,15 +59,29 @@ Then('the quiz should be displayed', () => {
 
 When('the user starts the quiz', () => {
     tenantAct.clicksOnStartQuiz();
-    // Capture the order of quiz questions at the start of the quiz
-    cy.get('.text-node').then(($questions) => {
-      firstOrder = [...$questions].map(q => q.innerText.trim());
-      cy.log('First order:', firstOrder);
-    });
 });
 
 When('answers all the questions', () => {
-    tenantAct.answerForQuestions();
+    
+    cy.get('.text-node').invoke('text').then((text1) => {
+    firstOrder.push(text1.trim());
+
+    cy.get('label').contains('span','صح').click();
+    cy.get('button').contains('تقديم الإجابة').click({force:true});
+    cy.get('button').contains('السؤال التالي').click();
+
+    // Second question
+    cy.get('.text-node').invoke('text').then((text2) => {
+      firstOrder.push(text2.trim());
+      cy.log('First order:', firstOrder);
+    });
+
+    cy.get('button').contains('تقديم الإجابة').click({force:true});
+    cy.wait(3000)
+    cy.get('button').contains('إنهاء الاختبار').click({force : true});
+    cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
+
+  });
 });
 
 Then('the quiz should be submitted successfully', () => {
@@ -78,11 +92,24 @@ When('the user clicks on "إعادة الاختبار"', () => {
 
     tenantAct.clicksOnRetakeTheQuiz();
 
-    // Capture the order of quiz questions on the retake
-    cy.get('.text-node').then(($questions) => {
-      secondOrder = [...$questions].map(q => q.innerText.trim());
+    cy.get('.text-node').invoke('text').then((text1) => {
+        secondOrder.push(text1.trim());
+        cy.get('label').contains('span','صح').click();
+        cy.get('button').contains('تقديم الإجابة').click();
+        cy.get('button').contains('السؤال التالي').click();
+
+    // Second question after retake
+    cy.get('.text-node').invoke('text').then((text2) => {
+      secondOrder.push(text2.trim());
       cy.log('Second order:', secondOrder);
     });
+
+    cy.get('button').contains('تقديم الإجابة').click({force:true});
+    cy.wait(3000)
+    cy.get('button').contains('إنهاء الاختبار').click({force : true});
+    cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
+  });
+
 });
 
 Then('the quiz should be retaken successfully', () => {
@@ -91,5 +118,7 @@ Then('the quiz should be retaken successfully', () => {
 
 //check that the question order is different between attempts if randomized order is enabled
 Then('the questions should appear in a different order if randomized setting is enabled', () => {
+    cy.wrap(null).then(() => {
     expect(firstOrder).to.not.deep.equal(secondOrder);
+  });
 });

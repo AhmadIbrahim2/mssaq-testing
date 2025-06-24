@@ -20,6 +20,7 @@ When('clicks on "ادارة المحتوى"',()=>{
 
 When('clicks on "الدورات التدريبية"',()=>{
     addQuizAct.clicksOnTrainingCourse();
+    cy.wait(3000)
 });
 
 When('clicks on "تعديل" of the created course',()=>{
@@ -62,6 +63,7 @@ When('clicks on "إضافة جديد" to create the quiz', () => {
 });
 
 When('opens advanced settings by clicking on "اعدادات متقدمة"', () => {
+    cy.wait(3000)
     addQuizAct.openAdvanceSettings();
 });
 

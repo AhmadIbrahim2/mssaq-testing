@@ -33,6 +33,7 @@ When ('select "دورة تدريبية" as the type',()=>{
 
 When ('click the "إضافة جديد" button to save',()=>{
     createCourseAct.saveCourse();
+    cy.wait(3000)
 })
 
 Then ('should see the course title displayed at the top',()=>{
