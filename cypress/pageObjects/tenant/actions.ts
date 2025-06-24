@@ -30,14 +30,31 @@ class TenantActions {
         return this;
     }
 
-    answerForQuestions () {
-        cy.get('label').contains('span','صح').click();
-        cy.get('button').contains('تقديم الإجابة').click();
-        cy.get('button').contains('السؤال التالي').click();
-        cy.get('label').contains('span','صح').click();
-        cy.get('button').contains('تقديم الإجابة').click();
-        cy.get('button').contains('إنهاء الاختبار').click({force : true});
-        cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
+    answerForQuestions (order : string[]) {
+    // Get the text of the first question
+    cy.get('.text-node').invoke('text').then((text1) => {
+
+    // Save the first question text into the order array
+    order.push(text1.trim());
+
+    cy.get('label').contains('span','صح').click();
+    cy.get('button').contains('تقديم الإجابة').click({force:true});
+    cy.get('button').contains('السؤال التالي').click();
+
+    // Get the text of the second question
+    cy.get('.text-node').invoke('text').then((text2) => {
+
+      // Save the second question text into the order array
+      order.push(text2.trim());
+      // Log the question order to the Cypress console
+      cy.log('First order:', order);
+    });
+
+    cy.get('button').contains('تقديم الإجابة').click({force:true});
+    cy.get('button').contains('إنهاء الاختبار').click({force : true});
+    cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
+
+  });
         return this;
     }
 
