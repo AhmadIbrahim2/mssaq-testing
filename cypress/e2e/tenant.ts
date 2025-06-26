@@ -45,7 +45,6 @@ When('clicks on "إتمام الشراء بشكل مجاني"', () => {
 });
 
 When('clicks on "متابعة الدورة"', () => {
-    cy.wait(3000)
     tenantAct.clicksOnCompleteCourse();
     cy.wait(3000)
 });
