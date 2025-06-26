@@ -38,7 +38,7 @@ class TenantActions {
     order.push(text1.trim());
 
     cy.get('label').contains('span','صح').click();
-    cy.get('button').contains('تقديم الإجابة').click({force:true});
+    cy.get('button').contains('تقديم الإجابة').click();
     cy.get('button').contains('السؤال التالي').click();
 
     // Get the text of the second question
@@ -49,9 +49,9 @@ class TenantActions {
       // Log the question order to the Cypress console
       cy.log(`${label}:`, order);
     });
-
-    cy.get('button').contains('تقديم الإجابة').click({force:true});
-    cy.get('button').contains('إنهاء الاختبار').click({force : true});
+    cy.get('label').contains('span','صح').click();
+    cy.get('button').contains('تقديم الإجابة').click();
+    cy.get('button').contains('إنهاء الاختبار').click();
     cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
 
   });
