@@ -31,28 +31,29 @@ class TenantActions {
     }
 
     answerForQuestions (order : string[], label: string) {
-    // Get the text of the first question
-    cy.get('.text-node').invoke('text').then((text1) => {
+        order.length = 0;
+        // Get the text of the first question
+        cy.get('.text-node').invoke('text').then((text1) => {
 
-    // Save the first question text into the order array
+        // Save the first question text into the order array
     order.push(text1.trim());
 
-    cy.get('label').contains('span','صح').click();
-    cy.get('button').contains('تقديم الإجابة').click();
-    cy.get('button').contains('السؤال التالي').click();
+        cy.get('label').contains('span','صح').click();
+        cy.get('button').contains('تقديم الإجابة').click();
+        cy.get('button').contains('السؤال التالي').click();
 
-    // Get the text of the second question
-    cy.get('.text-node').invoke('text').then((text2) => {
+        // Get the text of the second question
+        cy.get('.text-node').invoke('text').then((text2) => {
 
-      // Save the second question text into the order array
-      order.push(text2.trim());
-      // Log the question order to the Cypress console
-      cy.log(`${label}:`, order);
-    });
-    cy.get('label').contains('span','صح').click();
-    cy.get('button').contains('تقديم الإجابة').click();
-    cy.get('button').contains('إنهاء الاختبار').click();
-    cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
+            // Save the second question text into the order array
+            order.push(text2.trim());
+            // Log the question order to the Cypress console
+            cy.log(`${label}:`, order);
+        });
+        cy.get('label').contains('span','صح').click();
+        cy.get('button').contains('تقديم الإجابة').click();
+        cy.get('button').contains('إنهاء الاختبار').click();
+        cy.get('div[role="dialog"]').find('button').contains('إنهاء الاختبار').should('be.visible').click({ force: true });
 
   });
         return this;

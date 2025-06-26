@@ -37,6 +37,7 @@ When('the user clicks on the course', () => {
 });
 
 When('clicks on "انضم الآن مجانًا"', () => {
+    cy.wait(3000)
     tenantAct.clickOnJoinFree();
 });
 
@@ -46,7 +47,6 @@ When('clicks on "إتمام الشراء بشكل مجاني"', () => {
 
 When('clicks on "متابعة الدورة"', () => {
     tenantAct.clicksOnCompleteCourse();
-    cy.wait(3000)
 });
 
 Then('the quiz should be displayed', () => {
@@ -70,7 +70,7 @@ Then('the quiz should be submitted successfully', () => {
 
 When('the user clicks on "إعادة الاختبار"', () => {
     tenantAct.clicksOnRetakeTheQuiz();
-    
+
     tenantAct.answerForQuestions(secondOrder, 'Second order');
 });
 
